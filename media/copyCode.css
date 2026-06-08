@@ -1,0 +1,54 @@
+/* Code block copy button */
+pre {
+    position: relative;
+}
+
+.markdown-copy-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-family: var(--vscode-font-family, sans-serif);
+    color: var(--vscode-button-foreground, #fff);
+    background-color: var(--vscode-button-background, #0078d4);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+    z-index: 10;
+    line-height: 1.4;
+    user-select: none;
+}
+
+pre:hover .markdown-copy-btn {
+    opacity: 1;
+}
+
+.markdown-copy-btn:hover {
+    background-color: var(--vscode-button-hoverBackground, #005fa3);
+}
+
+.markdown-copy-btn:focus {
+    outline: 1px solid var(--vscode-focusBorder, #007fd4);
+    opacity: 1;
+}
+
+.markdown-copy-btn--copied {
+    opacity: 1 !important;
+}
+
+/* Inline code copy indicator */
+:not(pre) > code {
+    cursor: pointer;
+}
+
+:not(pre) > code:hover::after {
+    content: ' 📋';
+}
+
+:not(pre) > code[data-copy-state="copied"]::after {
+    content: ' ✓';
+    color: var(--vscode-notificationsInfoIcon-foreground, #4db6ac);
+}
