@@ -2,9 +2,31 @@
   "name": "markdown-code-copy",
   "displayName": "Markdown Code Copy",
   "description": "Copy code from code blocks and inline-code text from VSCode's built-in Markdown viewer.",
+  "author": {
+    "name": "Phillip A. McIntyre Jr.",
+    "email": "phillipmcintyre@philamentllc.com",
+    "url": "https://github.com/pmcintyre3"
+  },
+  "publisher": "philament-llc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmcintyre3/markdown-code-copy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pmcintyre3/markdown-code-copy/issues"
+  },
+  "homepage": "https://github.com/pmcintyre3/markdown-code-copy#readme",
+  "keywords": [
+    "vscode",
+    "markdown",
+    "md",
+    "markdown-preview",
+    "copy-code",
+    "copy-button"
+  ],
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.120.0"
+    "vscode": "^1.102.0"
   },
   "categories": [
     "Other"
@@ -14,12 +36,28 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "markdown.markdownItPlugins": true,
     "markdown.previewScripts": [
-      "./media/copyCode.js"
+      "./media/copyButtonScript.js"
     ],
     "markdown.previewStyles": [
-      "./media/copyCode.css"
-    ]
+      "./media/styles.css"
+    ],
+    "configuration": {
+      "title": "Markdown Code Copy",
+      "properties": {
+        "markdownCodeCopy.enableCodeBlockCopy": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a copy button on fenced code blocks in the Markdown preview."
+        },
+        "markdownCodeCopy.enableInlineCodeCopy": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a copy button on inline code spans in the Markdown preview."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -36,15 +74,21 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.120.0",
+    "@types/markdown-it": "^14.1.2",
     "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
-    "typescript-eslint": "^8.56.1",
-    "eslint": "^9.39.3",
-    "esbuild": "^0.27.3",
+    "@types/node": "^20.19.9",
+    "@types/vscode": "^1.102.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^4.1.0",
+    "esbuild": "^0.25.3",
+    "eslint": "^9.25.1",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0"
   }
 }
