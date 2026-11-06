@@ -1,0 +1,110 @@
+.code-block-wrapper {
+    position: relative;
+}
+
+.copy-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--vscode-button-background, #007acc);
+    color: var(--vscode-button-foreground, #ffffff);
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 1000;
+    font-size: 12px;
+}
+
+.copy-button:hover {
+    background: var(--vscode-button-hoverBackground, #005a9e);
+}
+
+.copy-button:active {
+    background: var(--vscode-button-secondaryBackground, #004578);
+}
+
+.copy-button.copied {
+    background: var(--vscode-testing-iconPassed, #28a745);
+    color: var(--vscode-button-foreground, #ffffff);
+}
+
+.copy-button.copy-failed {
+    background: var(--vscode-errorForeground, #dc3545);
+    color: var(--vscode-button-foreground, #ffffff);
+}
+
+.inline-code-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.copy-button-inline {
+    position: absolute;
+    top: -2px;
+    right: -20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 1000;
+}
+
+.inline-code-wrapper:hover .copy-button-inline,
+.inline-code-wrapper:focus-visible {
+    opacity: 1;
+}
+
+.copy-button-inline:hover {
+    background: var(--vscode-toolbar-hoverBackground, rgba(0, 122, 204, 0.1));
+    border-radius: 2px;
+}
+
+.copy-button-inline.copied {
+    color: var(--vscode-testing-iconPassed, #28a745);
+}
+
+.copy-button-inline.copy-failed {
+    color: var(--vscode-errorForeground, #dc3545);
+}
+
+.copy-button,
+.copy-button-inline {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.copy-button:focus-visible,
+.copy-button-inline:focus-visible {
+    outline: 2px solid var(--vscode-focusBorder, #007acc);
+    outline-offset: 2px;
+}
+
+/* High Contrast / forced-colors mode */
+@media (forced-colors: active) {
+    .copy-button,
+    .copy-button-inline {
+        border: 1px solid ButtonText;
+        forced-color-adjust: none;
+    }
+}
+
+/* Honor reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .copy-button,
+    .copy-button-inline {
+        transition: none;
+    }
+}
+
+/* Hide inline button on very narrow previews hwere the -20px offset pushes it off-screen;
+    block-button copy still works at any width */
+@media (max-width: 300px) {
+    .copy-button-inline {
+        display: none;
+    }
+}

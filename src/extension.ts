@@ -1,10 +1,13 @@
 import * as vscode from 'vscode';
-import { MarkdownPreviewService } from './services/markdownPreviewService';
+import MarkdownIt from 'markdown-it';
+import copyButtonPlugin from './services/copyButtonService';
 
-export function activate(context: vscode.ExtensionContext): void {
-    const service = new MarkdownPreviewService(context);
-    service.activate();
-    context.subscriptions.push(service);
+export function activate(context: vscode.ExtensionContext) {
+    return {
+        extendMarkdownIt(md: MarkdownIt): MarkdownIt {
+            return md.use(copyButtonPlugin);
+        }
+    };
 }
 
 export function deactivate(): void {}
